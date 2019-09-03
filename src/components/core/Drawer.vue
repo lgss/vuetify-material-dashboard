@@ -28,7 +28,7 @@
       </v-list-item-avatar>
 
       <v-list-item-title class="title">
-        VUETIFY MD
+        LGSS Digital
       </v-list-item-title>
     </v-list-item>
 
@@ -51,22 +51,6 @@
         <v-list-item-title v-text="link.text" />
       </v-list-item>
     </v-list>
-
-    <template v-slot:append>
-      <v-list nav>
-        <v-list-item
-          to="/upgrade"
-        >
-          <v-list-item-action>
-            <v-icon>mdi-package-up</v-icon>
-          </v-list-item-action>
-
-          <v-list-item-title class="font-weight-light">
-            Upgrade To PRO
-          </v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </template>
   </v-navigation-drawer>
 </template>
 
