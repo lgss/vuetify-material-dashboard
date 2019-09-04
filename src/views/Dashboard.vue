@@ -157,13 +157,12 @@
 
           <p class="category d-inline-flex font-weight-light">
             <v-icon
-              color="green"
+              color="grey"
               small
             >
-              mdi-arrow-up
-            </v-icon>
-            <span class="green--text">98.7%</span>&nbsp;
-            increase compared to yesterdays uptime
+              mdi-alert-circle-outline
+            </v-icon>&nbsp;
+            1:2:2 split
           </p>
 
           <template v-slot:actions>
