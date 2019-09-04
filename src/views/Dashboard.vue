@@ -187,9 +187,9 @@
       >
         <material-stats-card
           color="green lighten-2"
-          icon="mdi-check-circle-outline"
-          title="Deploys per day"
-          value="2"
+          icon="mdi-axe"
+          title="Deploys per week"
+          value="10"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
