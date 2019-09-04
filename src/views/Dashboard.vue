@@ -74,7 +74,7 @@
         <material-chart-card
           :data="serviceUptime.data"
           :options="serviceUptime.options"
-          color="info darken-1"
+          color="primary"
           type="Line"
         >
           <h4 class="title font-weight-light">
@@ -112,7 +112,7 @@
           :data="emailsSubscriptionChart.data"
           :options="emailsSubscriptionChart.options"
           :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="purple"
+          color="secondary"
           type="Line"
         >
           <h4 class="title font-weight-light">
@@ -148,7 +148,7 @@
         <material-chart-card
           :data="costPerPhase.data"
           :options="costPerPhase.options"
-          color="green lighten-1"
+          color="tertiary"
           type="Pie"
         >
           <h4 class="title font-weight-light">
@@ -248,11 +248,12 @@
             }),
             low: 90,
             high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            onlyInteger: true,
             chartPadding: {
-              top: 0,
-              right: 0,
+              top: 30,
+              right: 10,
               bottom: 0,
-              left: 0
+              left: 10
             }
           }
         },
@@ -273,7 +274,7 @@
               bottom: 0,
               left: 0
             },*/
-            donut: false,
+            donut: true,
             startAngle: 270,
             showLabel: true
           },
@@ -300,6 +301,7 @@
 
             ]
           },
+          onlyInteger: true,
           options: {
             lineSmooth: this.$chartist.Interpolation.cardinal({
               tension: 10
@@ -310,10 +312,10 @@
             low: 10,
             high: 100,
             chartPadding: {
-              top: 0,
-              right: 0,
+              top: 10,
+              right: 10,
               bottom: 0,
-              left: 0
+              left: 10
             }
           },
           responsiveOptions: [

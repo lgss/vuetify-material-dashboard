@@ -4,7 +4,7 @@
     v-model="inputValue"
     :src="image"
     app
-    color="grey"
+    color="secondary"
     dark
     floating
     mobile-break-point="991"
