@@ -4,7 +4,7 @@
     v-model="inputValue"
     :src="image"
     app
-    color="grey darken-2"
+    color="grey"
     dark
     floating
     mobile-break-point="991"
@@ -21,7 +21,7 @@
     <v-list-item two-line>
       <v-list-item-avatar color="white">
         <v-img
-          src="https://cdn.vuetifyjs.com/images/logos/v.png"
+          src="../../assets/logo.svg"
           height="34"
           contain
         />
@@ -66,7 +66,7 @@
       opened: {
         type: Boolean,
         default: false
-      }
+      },
     },
     data: () => ({
       links: [
@@ -74,7 +74,7 @@
           to: '/',
           icon: 'mdi-view-dashboard',
           text: 'Dashboard'
-        },
+        }/*,
         {
           to: '/user-profile',
           icon: 'mdi-account',
@@ -104,7 +104,7 @@
           to: '/notifications',
           icon: 'mdi-bell',
           text: 'Notifications'
-        }
+        }*/
       ]
     }),
 
