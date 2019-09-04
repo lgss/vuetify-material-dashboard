@@ -1,18 +1,158 @@
 <template>
   <v-container fluid>
     <v-row>
+      <!-- customer satisfaction -->
       <v-col
         cols="12"
-        lg="6"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="yellow darken-2"
+          icon="mdi-emoticon-outline"
+          title="Customer satisfaction"
+          value="4.8/5"
+          small-value="smiles"
+          sub-icon="mdi-information-outline"
+          sub-text="Post project follow up"
+          sub-text-color="text-primary"
+        />
+      </v-col>
+      <!-- / customer satisfaction -->
+      <!-- time to value -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="green lighten-2"
+          icon="mdi-clock-outline"
+          title="Time to value"
+          value="8 weeks"
+          sub-icon="mdi-calendar"
+          sub-text="Delivery start to deployment"
+        />
+      </v-col>
+      <!-- / time to value -->
+      <!-- service availability -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="purple lighten-2"
+          icon="mdi-check-circle-outline"
+          title="Service availability"
+          value="98.83%"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
+      </v-col>
+      <!-- / service availability -->
+      <!-- value created -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="blue lighten-2"
+          icon="mdi-alarm-check"
+          title="Value created"
+          value="3:1"
+          sub-icon="mdi-tag"
+          sub-text="Spend vs return"
+        />
+      </v-col>
+      <!-- / value created -->
+      <v-col
+        cols="12"
+        lg="4"
       >
         <material-chart-card
           :data="serviceUptime.data"
           :options="serviceUptime.options"
-          color="info"
+          color="info darken-1"
           type="Line"
         >
           <h4 class="title font-weight-light">
             Uptime
+          </h4>
+
+          <p class="category d-inline-flex font-weight-light">
+            <v-icon
+              color="green"
+              small
+            >
+              mdi-arrow-up
+            </v-icon>
+            <span class="green--text">1.05%</span>&nbsp;
+            increase compared to last months uptime
+          </p>
+
+          <template v-slot:actions>
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
+          </template>
+        </material-chart-card>
+      </v-col>
+
+      <v-col
+        cols="12"
+        lg="4"
+      >
+        <material-chart-card
+          :data="emailsSubscriptionChart.data"
+          :options="emailsSubscriptionChart.options"
+          :responsive-options="emailsSubscriptionChart.responsiveOptions"
+          color="purple"
+          type="Line"
+        >
+          <h4 class="title font-weight-light">
+            Lead time
+          </h4>
+          <p class="category d-inline-flex font-weight-light">
+            <v-icon
+              color="green"
+              small
+            >
+              mdi-arrow-down
+            </v-icon>
+            <span class="green--text">12 days</span>&nbsp;
+            Time to value
+          </p>
+
+          <template v-slot:actions>
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
+          </template>
+        </material-chart-card>
+      </v-col>
+
+      <v-col
+        cols="12"
+        lg="4"
+      >
+        <material-chart-card
+          :data="costPerPhase.data"
+          :options="costPerPhase.options"
+          color="green lighten-1"
+          type="Pie"
+        >
+          <h4 class="title font-weight-light">
+            Cost per phase
           </h4>
 
           <p class="category d-inline-flex font-weight-light">
@@ -37,99 +177,56 @@
           </template>
         </material-chart-card>
       </v-col>
-
-      <v-col
-        cols="12"
-        lg="6"
-      >
-        <material-chart-card
-          :data="emailsSubscriptionChart.data"
-          :options="emailsSubscriptionChart.options"
-          :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
-        >
-          <h4 class="title font-weight-light">
-            Email Subscription
-          </h4>
-          <p class="category d-inline-flex font-weight-light">
-            Last Campaign Performance
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
-          </template>
-        </material-chart-card>
-      </v-col>
-
-
+    </v-row>
+    <v-row>
+      <!-- deployment frequency -->
       <v-col
         cols="12"
         sm="6"
-        lg="3"
+        lg="4"
       >
         <material-stats-card
           color="green lighten-2"
-          icon="mdi-clock-outline"
-          title="Time to value"
-          value="8 weeks"
-          sub-icon="mdi-calendar"
-          sub-text="Delivery start to deployment"
-        />
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <material-stats-card
-          color="yellow darken-2"
-          icon="mdi-emoticon-outline"
-          title="Customer satisfaction"
-          value="4.8/5"
-          small-value="smiles"
-          sub-icon="mdi-information-outline"
-          sub-text="Post project follow up"
-          sub-text-color="text-primary"
-        />
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <material-stats-card
-          color="blue lighten-2"
-          icon="mdi-alarm-check"
-          title="Value created"
-          value="3:1"
-          sub-icon="mdi-tag"
-          sub-text="Spend vs return"
-        />
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <material-stats-card
-          color="purple lighten-2"
           icon="mdi-check-circle-outline"
-          title="Prospects to project"
-          value="98.888%"
+          title="Deploys per day"
+          value="2"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
       </v-col>
+      <!-- / deployment frequency -->
+      <!-- deployment frequency -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="4"
+      >
+        <material-stats-card
+          color="orange lighten-2"
+          icon="mdi-ambulance"
+          title="Support per tickets per user"
+          value="0.2"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
+      </v-col>
+      <!-- / deployment frequency -->
+            <!-- deployment frequency -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="4"
+      >
+        <material-stats-card
+          color="purple lighten-2"
+          icon="mdi-account-heart"
+          title="Prospect to project"
+          value="98.89%"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
+      </v-col>
+      <!-- / deployment frequency -->
     </v-row>
   </v-container>
 </template>
@@ -148,32 +245,10 @@
           },
           options: {
             lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0
+              tension: 10
             }),
-            low: 70,
+            low: 90,
             high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 30,
-              right: 0,
-              bottom: 0,
-              left: 0
-            },
-            ratio: 1
-          }
-        },
-        dataCompletedTasksChart: {
-          data: {
-            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-            series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
-            ]
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0
-            }),
-            low: 0,
-            //high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
             chartPadding: {
               top: 0,
               right: 0,
@@ -182,23 +257,62 @@
             }
           }
         },
+        costPerPhase: {
+          data: {
+            labels: ['Lead Time','Design','Delivery'],
+            series: [10, 45, 45]
+          },
+          options: {
+            labelInterpolationFnc: function(value) {
+              return value
+            },
+            low: 0,
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            /*chartPadding: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
+            },*/
+            donut: false,
+            startAngle: 270,
+            showLabel: true
+          },
+          responsiveOptions: [
+            ['screen and (min-width: 640px)', {
+              chartPadding: 0,
+              labelOffset: 20,
+              labelDirection: 'explode',
+              labelInterpolationFnc: function(value) {
+                return value;
+              }
+            }],
+            ['screen and (min-width: 1024px)', {
+              labelOffset: 80,
+              chartPadding: 0
+            }]
+          ]
+        },
         emailsSubscriptionChart: {
           data: {
-            labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
             series: [
-              [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+              [90, 75, 50, 88, 65, 28]
 
             ]
           },
           options: {
+            lineSmooth: this.$chartist.Interpolation.cardinal({
+              tension: 10
+            }),
             axisX: {
               showGrid: false
             },
-            low: 0,
-            //high: 1000,
+            low: 10,
+            high: 100,
             chartPadding: {
               top: 0,
-              right: 5,
+              right: 0,
               bottom: 0,
               left: 0
             }
