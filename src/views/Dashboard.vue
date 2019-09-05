@@ -1,18 +1,84 @@
 <template>
   <v-container fluid>
     <v-row>
+      <!-- customer satisfaction -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="yellow darken-2"
+          icon="mdi-emoticon-outline"
+          title="Customer satisfaction"
+          :value="((Math.random() + 4)).toFixed(1)"
+          small-value="/5 smiles"
+          sub-icon="mdi-information-outline"
+          sub-text="Post project follow up"
+          sub-text-color="text-primary"
+        />
+      </v-col>
+      <!-- / customer satisfaction -->
+      <!-- time to value -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="green lighten-2"
+          icon="mdi-clock-outline"
+          title="Time to value"
+          value="8 weeks"
+          sub-icon="mdi-calendar"
+          sub-text="Delivery start to deployment"
+        />
+      </v-col>
+      <!-- / time to value -->
+      <!-- service availability -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="purple lighten-2"
+          icon="mdi-check-circle-outline"
+          title="Service availability"
+          value="98.83%"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
+      </v-col>
+      <!-- / service availability -->
+      <!-- value created -->
+      <v-col
+        cols="12"
+        sm="6"
+        lg="3"
+      >
+        <material-stats-card
+          color="blue lighten-2"
+          icon="mdi-alarm-check"
+          title="Value created"
+          value="3:1"
+          sub-icon="mdi-tag"
+          sub-text="Spend vs return"
+        />
+      </v-col>
+      <!-- / value created -->
       <v-col
         cols="12"
         lg="4"
       >
         <material-chart-card
-          :data="dailySalesChart.data"
-          :options="dailySalesChart.options"
-          color="info"
+          :data="serviceUptime.data"
+          :options="serviceUptime.options"
+          color="primary"
           type="Line"
         >
           <h4 class="title font-weight-light">
-            Daily Sales
+            Uptime
           </h4>
 
           <p class="category d-inline-flex font-weight-light">
@@ -22,8 +88,8 @@
             >
               mdi-arrow-up
             </v-icon>
-            <span class="green--text">55%</span>&nbsp;
-            increase in today's sales
+            <span class="green--text">1.05%</span>&nbsp;
+            increase compared to last months uptime
           </p>
 
           <template v-slot:actions>
@@ -46,14 +112,21 @@
           :data="emailsSubscriptionChart.data"
           :options="emailsSubscriptionChart.options"
           :responsive-options="emailsSubscriptionChart.responsiveOptions"
-          color="red"
-          type="Bar"
+          color="secondary"
+          type="Line"
         >
           <h4 class="title font-weight-light">
-            Email Subscription
+            Lead time
           </h4>
           <p class="category d-inline-flex font-weight-light">
-            Last Campaign Performance
+            <v-icon
+              color="green"
+              small
+            >
+              mdi-arrow-down
+            </v-icon>
+            <span class="green--text">12 days</span>&nbsp;
+            Time to value
           </p>
 
           <template v-slot:actions>
@@ -73,16 +146,23 @@
         lg="4"
       >
         <material-chart-card
-          :data="dataCompletedTasksChart.data"
-          :options="dataCompletedTasksChart.options"
-          color="green"
-          type="Line"
+          :data="costPerPhase.data"
+          :options="costPerPhase.options"
+          color="tertiary"
+          type="Pie"
         >
-          <h3 class="title font-weight-light">
-            Completed Tasks
-          </h3>
+          <h4 class="title font-weight-light">
+            Cost per phase
+          </h4>
+
           <p class="category d-inline-flex font-weight-light">
-            Last Last Campaign Performance
+            <v-icon
+              color="grey"
+              small
+            >
+              mdi-alert-circle-outline
+            </v-icon>&nbsp;
+            1:2:2 split
           </p>
 
           <template v-slot:actions>
@@ -92,312 +172,60 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">campaign sent 26 minutes ago</span>
+            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
           </template>
         </material-chart-card>
       </v-col>
-
+    </v-row>
+    <v-row>
+      <!-- deployment frequency -->
       <v-col
         cols="12"
         sm="6"
-        lg="3"
+        lg="4"
       >
         <material-stats-card
-          color="green"
-          icon="mdi-store"
-          title="Revenue"
-          value="$34,245"
-          sub-icon="mdi-calendar"
-          sub-text="Last 24 Hours"
-        />
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <material-stats-card
-          color="orange"
-          icon="mdi-content-copy"
-          title="Used Space"
-          value="49/50"
-          small-value="GB"
-          sub-icon="mdi-alert"
-          sub-icon-color="error"
-          sub-text="Get More Space..."
-          sub-text-color="text-primary"
-        />
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <material-stats-card
-          color="red"
-          icon="mdi-information-outline"
-          title="Fixed Issues"
-          value="75"
-          sub-icon="mdi-tag"
-          sub-text="Tracked from Github"
-        />
-      </v-col>
-
-      <v-col
-        cols="12"
-        sm="6"
-        lg="3"
-      >
-        <material-stats-card
-          color="info"
-          icon="mdi-twitter"
-          title="Followers"
-          value="+245"
+          color="green lighten-2"
+          icon="mdi-axe"
+          title="Deploys per week"
+          value="10"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
       </v-col>
-
+      <!-- / deployment frequency -->
+      <!-- deployment frequency -->
       <v-col
         cols="12"
-        lg="6"
+        sm="6"
+        lg="4"
       >
-        <material-card
-          color="orange"
-          title="Employee Stats"
-          text="New employees on 15th September, 2016"
-        >
-          <v-data-table
-            :headers="headers"
-            :items="items"
-            hide-default-footer
-          />
-        </material-card>
+        <material-stats-card
+          color="orange lighten-2"
+          icon="mdi-ambulance"
+          title="Support per tickets per user"
+          value="0.2"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
       </v-col>
-
+      <!-- / deployment frequency -->
+            <!-- deployment frequency -->
       <v-col
         cols="12"
-        lg="6"
+        sm="6"
+        lg="4"
       >
-        <material-card
-          class="card-tabs"
-          color="green"
-        >
-          <template v-slot:header>
-            <v-tabs
-              v-model="tabs"
-              background-color="transparent"
-              slider-color="white"
-            >
-              <span
-                class="subheading font-weight-light mx-3"
-                style="align-self: center"
-              >Tasks:</span>
-              <v-tab class="mr-3">
-                <v-icon class="mr-2">
-                  mdi-bug
-                </v-icon>
-                Bugs
-              </v-tab>
-              <v-tab class="mr-3">
-                <v-icon class="mr-2">
-                  mdi-code-tags
-                </v-icon>
-                Website
-              </v-tab>
-              <v-tab>
-                <v-icon class="mr-2">
-                  mdi-cloud
-                </v-icon>
-                Server
-              </v-tab>
-            </v-tabs>
-          </template>
-
-          <v-tabs-items v-model="tabs">
-            <v-tab-item
-              v-for="n in 3"
-              :key="n"
-            >
-              <v-list
-                three-line
-                class="py-0"
-              >
-                <v-list-item @click="complete(0)">
-                  <v-list-item-action class="align-self-center">
-                    <v-checkbox
-                      :value="list[0]"
-                      color="green"
-                    />
-                  </v-list-item-action>
-
-                  <v-list-item-title>
-                    Sign contract for "What are conference organized afraid of?"
-                  </v-list-item-title>
-
-                  <div class="d-flex">
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <template v-slot:activator="{ attrs, on }">
-                        <v-btn
-                          class="v-btn--simple"
-                          color="green"
-                          icon
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon color="primary">
-                            mdi-pencil
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Edit</span>
-                    </v-tooltip>
-
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <template v-slot:activator="{ attrs, on }">
-                        <v-btn
-                          class="v-btn--simple"
-                          color="danger"
-                          icon
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon color="error">
-                            mdi-close
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-item>
-
-                <v-divider />
-
-                <v-list-item @click="complete(1)">
-                  <v-list-item-action class="align-self-center">
-                    <v-checkbox
-                      :value="list[1]"
-                      color="green"
-                    />
-                  </v-list-item-action>
-
-                  <v-list-item-title>
-                    Lines From Great Russian Literature? Or E-mails From My Boss?
-                  </v-list-item-title>
-
-                  <div class="d-flex">
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <template v-slot:activator="{ attrs, on }">
-                        <v-btn
-                          class="v-btn--simple"
-                          color="green"
-                          icon
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon color="primary">
-                            mdi-pencil
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Edit</span>
-                    </v-tooltip>
-
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <template v-slot:activator="{ attrs, on }">
-                        <v-btn
-                          class="v-btn--simple"
-                          color="danger"
-                          icon
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon color="error">
-                            mdi-close
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-item>
-
-                <v-divider />
-
-                <v-list-item @click="complete(2)">
-                  <v-list-item-action class="align-self-center">
-                    <v-checkbox
-                      :value="list[2]"
-                      color="green"
-                    />
-                  </v-list-item-action>
-
-                  <v-list-item-title>
-                    Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit
-                  </v-list-item-title>
-
-                  <div class="d-flex">
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <template v-slot:activator="{ attrs, on }">
-                        <v-btn
-                          class="v-btn--simple"
-                          color="green"
-                          icon
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon color="primary">
-                            mdi-pencil
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Edit</span>
-                    </v-tooltip>
-
-                    <v-tooltip
-                      top
-                      content-class="top"
-                    >
-                      <template v-slot:activator="{ attrs, on }">
-                        <v-btn
-                          class="v-btn--simple"
-                          color="danger"
-                          icon
-                          v-bind="attrs"
-                          v-on="on"
-                        >
-                          <v-icon color="error">
-                            mdi-close
-                          </v-icon>
-                        </v-btn>
-                      </template>
-                      <span>Close</span>
-                    </v-tooltip>
-                  </div>
-                </v-list-item>
-              </v-list>
-            </v-tab-item>
-          </v-tabs-items>
-        </material-card>
+        <material-stats-card
+          color="purple lighten-2"
+          icon="mdi-account-heart"
+          title="Prospect to project"
+          value="98.89%"
+          sub-icon="mdi-update"
+          sub-text="Just Updated"
+        />
       </v-col>
+      <!-- / deployment frequency -->
     </v-row>
   </v-container>
 </template>
@@ -406,67 +234,88 @@
   export default {
     data () {
       return {
-        dailySalesChart: {
+        serviceUptime: {
           data: {
-            labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
             series: [
-              [12, 17, 7, 17, 23, 18, 38]
-            ]
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0
-            }),
-            low: 0,
-            high: 50, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0
-            }
-          }
-        },
-        dataCompletedTasksChart: {
-          data: {
-            labels: ['12am', '3pm', '6pm', '9pm', '12pm', '3am', '6am', '9am'],
-            series: [
-              [230, 750, 450, 300, 280, 240, 200, 190]
-            ]
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 0
-            }),
-            low: 0,
-            high: 1000, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0
-            }
-          }
-        },
-        emailsSubscriptionChart: {
-          data: {
-            labels: ['Ja', 'Fe', 'Ma', 'Ap', 'Mai', 'Ju', 'Jul', 'Au', 'Se', 'Oc', 'No', 'De'],
-            series: [
-              [542, 443, 320, 780, 553, 453, 326, 434, 568, 610, 756, 895]
+              [98.2, 95.8, 99.1, 99.2, 98.2, 98.7]
 
             ]
           },
           options: {
+            lineSmooth: this.$chartist.Interpolation.cardinal({
+              tension: 10
+            }),
+            low: 90,
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            onlyInteger: true,
+            chartPadding: {
+              top: 30,
+              right: 10,
+              bottom: 0,
+              left: 10
+            }
+          }
+        },
+        costPerPhase: {
+          data: {
+            labels: ['Lead Time','Design','Delivery'],
+            series: [10, 45, 45]
+          },
+          options: {
+            labelInterpolationFnc: function(value) {
+              return value
+            },
+            low: 0,
+            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+            /*chartPadding: {
+              top: 0,
+              right: 0,
+              bottom: 0,
+              left: 0
+            },*/
+            donut: true,
+            startAngle: 270,
+            showLabel: true
+          },
+          responsiveOptions: [
+            ['screen and (min-width: 640px)', {
+              chartPadding: 0,
+              labelOffset: 20,
+              labelDirection: 'explode',
+              labelInterpolationFnc: function(value) {
+                return value;
+              }
+            }],
+            ['screen and (min-width: 1024px)', {
+              labelOffset: 80,
+              chartPadding: 0
+            }]
+          ]
+        },
+        emailsSubscriptionChart: {
+          data: {
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            series: [
+              [90, 75, 50, 88, 65, 28]
+
+            ]
+          },
+          onlyInteger: true,
+          options: {
+            lineSmooth: this.$chartist.Interpolation.cardinal({
+              tension: 10
+            }),
             axisX: {
               showGrid: false
             },
-            low: 0,
-            high: 1000,
+            low: 10,
+            high: 100,
             chartPadding: {
-              top: 0,
-              right: 5,
+              top: 10,
+              right: 10,
               bottom: 0,
-              left: 0
+              left: 10
             }
           },
           responsiveOptions: [
