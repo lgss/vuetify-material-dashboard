@@ -24,4 +24,5 @@ steps:
     awsCredentials: 'S3-Upload'
     regionName: 'eu-west-2'
     bucketName: 'lgss-performance-dashboard'
+    sourceFolder: './dist/'
     globExpressions: '**'
