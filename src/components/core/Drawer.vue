@@ -9,7 +9,7 @@
     floating
     mobile-break-point="991"
     persistent
-    width="260"
+    width="300"
   >
     <template v-slot:img="attrs">
       <v-img
@@ -28,8 +28,10 @@
       </v-list-item-avatar>
 
       <v-list-item-title class="title">
-        LGSS Digital
+        LGSS Performance
+        <v-list-item-subtitle>Digital, Strategy &amp; Architecture</v-list-item-subtitle>
       </v-list-item-title>
+      
     </v-list-item>
 
     <v-divider class="mx-3 mb-3" />
