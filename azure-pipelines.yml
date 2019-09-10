@@ -18,3 +18,10 @@ steps:
     npm install
     npm run build
   displayName: 'npm install and build'
+
+- task: S3Upload@1
+  inputs:
+    awsCredentials: 'S3-Upload'
+    regionName: 'eu-west-2'
+    bucketName: 'lgss-performance-dashboard'
+    globExpressions: '**'
