@@ -72,6 +72,39 @@
         lg="4"
       >
         <material-chart-card
+          v-for="item in uptimeData"
+          :data="item"
+          :options="serviceUptime.options"
+          color="primary"
+          type="Line"
+        >
+          <h4 class="title font-weight-light">
+            Uptime
+          </h4>
+
+          <p class="category d-inline-flex font-weight-light">
+            <v-icon
+              color="green"
+              small
+            >
+              mdi-arrow-up
+            </v-icon>
+            <!--span class="green--text">1.05%</span>&nbsp;
+            increase compared to last months uptime-->
+          </p>
+
+          <template v-slot:actions>
+            <v-icon
+              class="mr-2"
+              small
+            >
+              mdi-clock-outline
+            </v-icon>
+            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
+          </template>
+        </material-chart-card>
+        
+        <material-chart-card
           :data="serviceUptime.data"
           :options="serviceUptime.options"
           color="primary"
@@ -102,6 +135,7 @@
             <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
           </template>
         </material-chart-card>
+
       </v-col>
 
       <v-col
@@ -232,8 +266,17 @@
 
 <script>
   export default {
+    created() {
+      for (const tok of this.uptimeChecks) {
+        fetch('https://me9tlvcn8b.execute-api.eu-west-2.amazonaws.com/v1/uptime/' + tok)
+          .then(x => x.json())
+          .then(x => this.uptimeData[tok] = this.convertToGraph(x))
+      }
+    },
     data () {
       return {
+        uptimeChecks: ['eiyp'],
+        uptimeData: {},
         serviceUptime: {
           data: {
             labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
@@ -407,6 +450,21 @@
     methods: {
       complete (index) {
         this.list[index] = !this.list[index]
+      },
+      convertToGraph(data) {
+        let labels = []
+        let points = []
+        for (const time in data) {
+          labels.push(time)
+          const req = data[time]["requests"]
+          points.push(req['tolerated']/ req['samples'] * 100)
+        }
+        return {
+          labels,
+          series: [
+            points
+          ]
+        }
       }
     }
   }
