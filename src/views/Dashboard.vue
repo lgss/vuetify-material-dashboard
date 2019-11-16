@@ -411,7 +411,10 @@
       convertToGraph(data) {
         let labels = []
         let points = []
-        for (const time in data) {
+        const keys = Object.keys(data)
+        
+        for (let i = keys.length - 1; i > 0; i--) {
+          const time = keys[i]
           labels.push(time)
           const req = data[time]["requests"]
           points.push(req['tolerated']/ req['samples'] * 100)
