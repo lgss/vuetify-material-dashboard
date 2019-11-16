@@ -69,49 +69,16 @@
       <!-- / value created -->
       <v-col
         cols="12"
-        lg="4"
-      >
+        lg="4">
         <material-chart-card
           v-for="item in uptimeData"
-          :data="item"
-          :options="serviceUptime.options"
+          :data="item.data"
+          :options="uptimeOptions"
           color="primary"
           type="Line"
         >
           <h4 class="title font-weight-light">
-            Uptime
-          </h4>
-
-          <p class="category d-inline-flex font-weight-light">
-            <v-icon
-              color="green"
-              small
-            >
-              mdi-arrow-up
-            </v-icon>
-            <!--span class="green--text">1.05%</span>&nbsp;
-            increase compared to last months uptime-->
-          </p>
-
-          <template v-slot:actions>
-            <v-icon
-              class="mr-2"
-              small
-            >
-              mdi-clock-outline
-            </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
-          </template>
-        </material-chart-card>
-        
-        <material-chart-card
-          :data="serviceUptime.data"
-          :options="serviceUptime.options"
-          color="primary"
-          type="Line"
-        >
-          <h4 class="title font-weight-light">
-            Uptime
+            Uptime for {{item.token}}
           </h4>
 
           <p class="category d-inline-flex font-weight-light">
@@ -135,7 +102,6 @@
             <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
           </template>
         </material-chart-card>
-
       </v-col>
 
       <v-col
@@ -270,34 +236,25 @@
       for (const tok of this.uptimeChecks) {
         fetch('https://me9tlvcn8b.execute-api.eu-west-2.amazonaws.com/v1/uptime/' + tok)
           .then(x => x.json())
-          .then(x => this.uptimeData[tok] = this.convertToGraph(x))
+          .then(x => this.uptimeData.push({token: tok, data: this.convertToGraph(x)}))
       }
     },
     data () {
       return {
         uptimeChecks: ['eiyp'],
-        uptimeData: {},
-        serviceUptime: {
-          data: {
-            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
-            series: [
-              [98.2, 95.8, 99.1, 99.2, 98.2, 98.7]
-
-            ]
-          },
-          options: {
-            lineSmooth: this.$chartist.Interpolation.cardinal({
-              tension: 10
-            }),
-            low: 90,
-            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            onlyInteger: true,
-            chartPadding: {
-              top: 30,
-              right: 10,
-              bottom: 0,
-              left: 10
-            }
+        uptimeData: [],
+        uptimeOptions: {
+          lineSmooth: this.$chartist.Interpolation.cardinal({
+            tension: 10
+          }),
+          low: 90,
+          high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+          onlyInteger: true,
+          chartPadding: {
+            top: 30,
+            right: 10,
+            bottom: 0,
+            left: 10
           }
         },
         costPerPhase: {
