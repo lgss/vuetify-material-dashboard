@@ -84,17 +84,19 @@
       .ct-series-a .ct-area {
           fill: rgba(255,255,255,.4);
       }
-      .ct-chart-donut .ct-label {
-        fill: #ffffff;
+
+      .ct-series-b .ct-slice-donut,
+      .ct-series-b .ct-slice-pie {
+        stroke: #213E5F;//secondary
       }
-      .ct-series-a .ct-slice-donut {
-        stroke: #fffc;
+      .ct-series-c .ct-slice-donut,
+      .ct-series-c .ct-slice-pie {
+        stroke: #189E99;//primary
       }
-      .ct-series-b .ct-slice-donut {
-        stroke: #213e5f;
-      }
-      .ct-series-c .ct-slice-donut {
-        stroke: #189e99;
+      .ct-chart-donut .ct-label, .ct-chart-pie .ct-label {
+        fill: white;
+        fill-opacity: 1;
+        opacity: 1;
       }
     }
   }
