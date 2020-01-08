@@ -45,7 +45,7 @@
           color="purple lighten-2"
           icon="mdi-check-circle-outline"
           title="Service availability"
-          value="98.83%"
+          value="100%"
           sub-icon="mdi-update"
           sub-text="Just Updated"
         />
@@ -88,8 +88,8 @@
             >
               mdi-arrow-up
             </v-icon>
-            <span class="green--text">1.05%</span>&nbsp;
-            increase compared to last months uptime
+            <span class="green--text">1.83%</span>&nbsp;
+            increase compared to last months uptime 
           </p>
 
           <template v-slot:actions>
@@ -99,7 +99,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
+            <span class="caption grey--text font-weight-light">up is good</span>
           </template>
         </material-chart-card>
       </v-col>
@@ -120,13 +120,13 @@
           </h4>
           <p class="category d-inline-flex font-weight-light">
             <v-icon
-              color="green"
+              color="amber"
               small
             >
-              mdi-arrow-down
+              mdi-arrow-up
             </v-icon>
-            <span class="green--text">12 days</span>&nbsp;
-            Time to value
+            <span class="amber--text">8 days</span>&nbsp;
+            Time from proposal sign off to kick off
           </p>
 
           <template v-slot:actions>
@@ -136,7 +136,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 10 minutes ago</span>
+            <span class="caption grey--text font-weight-light">down is good</span>
           </template>
         </material-chart-card>
       </v-col>
@@ -172,7 +172,7 @@
             >
               mdi-clock-outline
             </v-icon>
-            <span class="caption grey--text font-weight-light">updated 4 minutes ago</span>
+            <span class="caption grey--text font-weight-light">last updated in December</span>
           </template>
         </material-chart-card>
       </v-col>
@@ -188,9 +188,9 @@
           color="green lighten-2"
           icon="mdi-axe"
           title="Deploys per week"
-          value="10"
+          value="9"
           sub-icon="mdi-update"
-          sub-text="Just Updated"
+          sub-text="more is better"
         />
       </v-col>
       <!-- / deployment frequency -->
@@ -206,7 +206,7 @@
           title="Support per tickets per user"
           value="0.2"
           sub-icon="mdi-update"
-          sub-text="Just Updated"
+          sub-text="lower is better"
         />
       </v-col>
       <!-- / deployment frequency -->
@@ -222,11 +222,58 @@
           title="Prospect to project"
           value="98.89%"
           sub-icon="mdi-update"
-          sub-text="Just Updated"
+          sub-text="higher is better"
         />
       </v-col>
       <!-- / deployment frequency -->
     </v-row>
+    <!--<v-row>
+      <v-col cols="6">
+          <v-simple-table
+      :dense="dense"
+      :fixed-header="fixedHeader"
+      :height="height"
+    >
+      <template v-slot:default>
+        <thead>
+          <tr>
+            <th class="text-left">Project</th>
+            <th class="text-left">Spend / Budget</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="item in desserts" :key="item.name">
+            <td>{{ item.name }}</td>
+            <td>{{ item.calories }}</td>
+          </tr>
+          <tr>
+            <td>Best Start in Life</td>
+            <td>
+
+                <v-progress-linear
+                  :active="projectSpend.active"
+                  :background-opacity="projectSpend.opacity"
+                  :bottom="projectSpend.bottom"
+                  :buffer-value="projectSpend.buffer"
+                  :height="projectSpend.height"
+                  :indeterminate="projectSpend.indeterminate"
+                  :query="projectSpend.query"
+                  :rounded="projectSpend.rounded"
+                  :stream="projectSpend.stream"
+                  :striped="projectSpend.striped"
+                  :top="projectSpend.top"
+                  :value="projectSpend.value"
+                  color="light-blue"
+                ></v-progress-linear>
+
+            </td>
+          </tr>
+        </tbody>
+      </template>
+    </v-simple-table>
+      </v-col>
+    </v-row>
+    <button v-on:click="getProjects">Get Projects</button>-->
   </v-container>
 </template>
 
@@ -234,11 +281,27 @@
   export default {
     data () {
       return {
+        projectSpend: {
+          absolute: false,
+          active: true,
+          opacity: 0.3,
+          bottom: false,
+          buffer: 100,
+          fixed: false,
+          height: 4,
+          indeterminate: false,
+          query: false,
+          rounded: false,
+          stream: false,
+          striped: false,
+          top: false,
+          value: 73,
+        },
         serviceUptime: {
           data: {
-            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept'],
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept','Oct','Nov','Dev','Jan'],
             series: [
-              [98.2, 95.8, 99.1, 99.2, 98.2, 98.7]
+              [98.2, 95.8, 99.1, 99.2, 98.2, 98.7,98.9,99.1,98.2,100]
 
             ]
           },
@@ -263,17 +326,12 @@
             series: [10, 45, 45]
           },
           options: {
-            labelInterpolationFnc: function(value) {
-              return value
+            labelInterpolationFnc: function(value,series) {
+              console.dir(value);
+              return value;//Math.round(value / data.series.reduce(sum) * 100) + '%';
             },
             low: 0,
-            high: 100, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-            /*chartPadding: {
-              top: 0,
-              right: 0,
-              bottom: 0,
-              left: 0
-            },*/
+            high: 100,
             donut: true,
             startAngle: 270,
             showLabel: true
@@ -281,23 +339,20 @@
           responsiveOptions: [
             ['screen and (min-width: 640px)', {
               chartPadding: 0,
-              labelOffset: 20,
+              labelOffset: 100,
               labelDirection: 'explode',
               labelInterpolationFnc: function(value) {
+                console.log(value);
                 return value;
               }
-            }],
-            ['screen and (min-width: 1024px)', {
-              labelOffset: 80,
-              chartPadding: 0
             }]
           ]
         },
         emailsSubscriptionChart: {
           data: {
-            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov','Dec'],
             series: [
-              [90, 75, 50, 88, 65, 28]
+              [90, 75, 50, 88, 65, 28, 35, 32, 40]
 
             ]
           },
@@ -407,6 +462,9 @@
     methods: {
       complete (index) {
         this.list[index] = !this.list[index]
+      },
+      getProjects: function(context) {
+        this.$store.dispatch("app/getProjects",{},{root:true});
       }
     }
   }

@@ -4,5 +4,9 @@ export default {
   setDrawer: set('drawer'),
   setImage: set('image'),
   setColor: set('color'),
-  toggleDrawer: toggle('drawer')
+  setProspectToProject: set('prospectToProject'),
+  toggleDrawer: toggle('drawer'),
+  setProjects: function(state, data) {
+    state.projects = data.projects; //['project1','project2'...etc];
+  }
 }
