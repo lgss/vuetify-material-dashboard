@@ -20,8 +20,8 @@ function route (path, view, name) {
     name: name || view,
     path,
     component: (resovle) => import(
-      `@/views/${view}.vue`
-    ).then(resovle)
+    `@/views/${view}.vue`
+    ).then(resovle),
   }
 }
 
@@ -31,7 +31,7 @@ Vue.use(Router)
 const router = new Router({
   mode: 'history',
   routes: paths.map(path => route(path.path, path.view, path.name)).concat([
-    { path: '*', redirect: '/' }
+    { path: '*', redirect: '/' },
   ]),
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
@@ -41,7 +41,7 @@ const router = new Router({
       return { selector: to.hash }
     }
     return { x: 0, y: 0 }
-  }
+  },
 })
 
 Vue.use(Meta)
@@ -54,8 +54,8 @@ if (process.env.GOOGLE_ANALYTICS) {
     id: process.env.GOOGLE_ANALYTICS,
     router,
     autoTracking: {
-      page: process.env.NODE_ENV !== 'development'
-    }
+      page: process.env.NODE_ENV !== 'development',
+    },
   })
 }
 
