@@ -471,20 +471,29 @@
     
       },
       created () {
-        fetch('https://2j41w5iw5c.execute-api.eu-west-2.amazonaws.com/Dev/formsumbission')
+        fetch('https://2j41w5iw5c.execute-api.eu-west-2.amazonaws.com/Dev/formsumbission/?form=formData_projectClosure')
         .then(data => data.json())
           .then(res => {
             let cost = 0;
             let value =0;
+            let design = 0;
+            let delivery = 0;
+            let lead = 0;
             let i = 1;
             res.Items.forEach(element => {
               cost += parseFloat(element.content.budget.valueCreated.actualSpend);
               value += parseFloat(element.content.budget.valueCreated.potentialSavings);
+              design += parseFloat(element.content.budget.design.actualCost);
+              delivery += parseFloat(element.content.budget.delivery.actualCost);
+              lead += parseFloat(element.content.budget.initialEngagement.actualCost);
             });
+            //console.log(design);
             let ratio = value/cost;
-            console.log(ratio);
-            this.value = ratio.toFixed(4) + ":1"
+            this.value = ratio.toFixed(4) + ":1";
+            let array = new Array(lead, design, delivery);
+            this.costPerPhase.data.series = array;
           })
+
       }
   }
 </script>
