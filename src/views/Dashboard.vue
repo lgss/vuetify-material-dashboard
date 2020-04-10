@@ -61,7 +61,7 @@
           color="blue lighten-2"
           icon="mdi-alarm-check"
           title="Value created"
-          value="3:1"
+          :value="value"
           sub-icon="mdi-tag"
           sub-text="Spend vs return"
         />
@@ -278,6 +278,7 @@
 </template>
 
 <script>
+  //import FormDataApi from '@/src/services/api/FormData.js'
   export default {
     data () {
       return {
@@ -456,7 +457,8 @@
           0: false,
           1: false,
           2: false
-        }
+        },
+        value: ''
       }
     },
     methods: {
@@ -466,6 +468,23 @@
       getProjects: function(context) {
         this.$store.dispatch("app/getProjects",{},{root:true});
       }
-    }
+    
+      },
+      created () {
+        fetch('https://2j41w5iw5c.execute-api.eu-west-2.amazonaws.com/Dev/formsumbission')
+        .then(data => data.json())
+          .then(res => {
+            let cost = 0;
+            let value =0;
+            let i = 1;
+            res.Items.forEach(element => {
+              cost += parseFloat(element.content.budget.valueCreated.actualSpend);
+              value += parseFloat(element.content.budget.valueCreated.potentialSavings);
+            });
+            let ratio = value/cost;
+            console.log(ratio);
+            this.value = ratio.toFixed(4) + ":1"
+          })
+      }
   }
 </script>
